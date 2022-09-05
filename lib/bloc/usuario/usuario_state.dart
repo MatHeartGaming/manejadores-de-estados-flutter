@@ -8,8 +8,13 @@ class UsuarioInitial extends UsuarioState {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "Usuario inicial: existe usuario false";
   }
+}
 
+class UsuarioActivo extends UsuarioState {
+  final existeUsuario = true;
+  final Usuario usuario;
+
+  UsuarioActivo(this.usuario);
 }
