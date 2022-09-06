@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:estados/bloc/usuario/user_bloc.dart';
+import 'package:estados/models/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,12 +10,20 @@ class Page1Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                final bloc = BlocProvider.of<UserBloc>(context, listen: false);
+                bloc.add(DeleteUser());
+              },
+              icon: Icon(Icons.exit_to_app)),
+        ],
         title: Text("Painga 1"),
       ),
       body: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
           return state.existUser
-              ? InformacionUsuario()
+              ? InformacionUsuario(user: state.user!)
               : Center(
                   child: Text("No hay informacion del usuario"),
                 );
@@ -29,8 +38,11 @@ class Page1Page extends StatelessWidget {
 }
 
 class InformacionUsuario extends StatelessWidget {
+  final Usuario user;
+
   const InformacionUsuario({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -38,35 +50,35 @@ class InformacionUsuario extends StatelessWidget {
     return SizedBox(
       height: double.infinity,
       width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("General",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          Divider(),
-          ListTile(
-            title: Text("Nombre: "),
-          ),
-          ListTile(
-            title: Text("Edad: "),
-          ),
-          ListTile(
-            title: Text(
-              "Profesiones",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("General",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Divider(),
+            ListTile(
+              title: Text("Nombre: ${user.nombre}"),
             ),
-          ),
-          Divider(),
-          ListTile(
-            title: Text("Profesion 1"),
-          ),
-          ListTile(
-            title: Text("Profesion 2"),
-          ),
-          ListTile(
-            title: Text("Profesion 3"),
-          ),
-        ],
+            ListTile(
+              title: Text("Edad: ${user.edad}"),
+            ),
+            ListTile(
+              title: Text(
+                "Profesiones",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Divider(),
+            //ListTile(title: Text("Profesion 1"),),
+            ...user.profesiones
+                .map((profesion) => ListTile(
+                      title: Text(profesion),
+                    ))
+                .toList(),
+          ],
+        ),
       ),
     );
   }
