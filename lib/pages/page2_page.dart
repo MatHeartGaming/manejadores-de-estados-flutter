@@ -1,8 +1,14 @@
+import 'package:estados/controllers/usuario_controller.dart';
+import 'package:estados/models/usuario.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Page2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //print("Arguments: ${Get.arguments}");
+    final usuarioCtrl = Get.find<UsuarioController>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Painga 2"),
@@ -16,9 +22,32 @@ class Page2Page extends StatelessWidget {
               child: MaterialButton(
                 color: Colors.blue,
                 onPressed: () {
-                  
+                  usuarioCtrl.cargarUsuario(Usuario(
+                      nombre: "Matteo",
+                      edad: 27,
+                      profesiones: [
+                        "Desarrollador de app",
+                        "Videojuador",
+                        "Apasionado de Hardware"
+                      ]));
+
+                  //Get.showSnackbar(SnackBar(content: content));
+                  Get.snackbar(
+                    "Usuario establecido",
+                    "${usuarioCtrl.usuario.value.nombre}",
+                    backgroundColor: Colors.white,
+                    boxShadows: [
+                      const BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: 10,
+                      )
+                    ],
+                  );
                 },
-                child: Text("Establecer Usuario", style: TextStyle(color: Colors.white),),
+                child: Text(
+                  "Establecer Usuario",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
             Container(
@@ -26,9 +55,12 @@ class Page2Page extends StatelessWidget {
               child: MaterialButton(
                 color: Colors.blue,
                 onPressed: () {
-                  
+                  usuarioCtrl.cambiarEdad(28);
                 },
-                child: Text("Cambiar Edad", style: TextStyle(color: Colors.white),),
+                child: Text(
+                  "Cambiar Edad",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
             Container(
@@ -36,9 +68,28 @@ class Page2Page extends StatelessWidget {
               child: MaterialButton(
                 color: Colors.blue,
                 onPressed: () {
-                  
+                  //usuarioCtrl.agregarProfesion("Profesion ${usuarioCtrl.usuario.value.profesiones.length + 1}");
+                  usuarioCtrl.agregarProfesion(
+                      "Profesion ${usuarioCtrl.profesionesCount + 1}");
                 },
-                child: Text("Anadir Profesion", style: TextStyle(color: Colors.white),),
+                child: Text(
+                  "Anadir Profesion",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 8),
+              child: MaterialButton(
+                color: Colors.blue,
+                onPressed: () {
+                  print("Theme Change");
+                  Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+                },
+                child: Text(
+                  "Cambiar Tema",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
