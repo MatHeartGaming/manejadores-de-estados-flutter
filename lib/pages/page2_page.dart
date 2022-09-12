@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Page2Page extends StatelessWidget {
+  const Page2Page({super.key});
+
   @override
   Widget build(BuildContext context) {
     //print("Arguments: ${Get.arguments}");
@@ -11,14 +13,14 @@ class Page2Page extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Painga 2"),
+        title: const Text("Painga 2"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: 8),
               child: MaterialButton(
                 color: Colors.blue,
                 onPressed: () {
@@ -44,27 +46,27 @@ class Page2Page extends StatelessWidget {
                     ],
                   );
                 },
-                child: Text(
+                child: const Text(
                   "Establecer Usuario",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: 8),
               child: MaterialButton(
                 color: Colors.blue,
                 onPressed: () {
                   usuarioCtrl.cambiarEdad(28);
                 },
-                child: Text(
+                child: const Text(
                   "Cambiar Edad",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: 8),
               child: MaterialButton(
                 color: Colors.blue,
                 onPressed: () {
@@ -72,21 +74,21 @@ class Page2Page extends StatelessWidget {
                   usuarioCtrl.agregarProfesion(
                       "Profesion ${usuarioCtrl.profesionesCount + 1}");
                 },
-                child: Text(
+                child: const Text(
                   "Anadir Profesion",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: 8),
               child: MaterialButton(
                 color: Colors.blue,
                 onPressed: () {
                   print("Theme Change");
                   Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
                 },
-                child: Text(
+                child: const Text(
                   "Cambiar Tema",
                   style: TextStyle(color: Colors.white),
                 ),

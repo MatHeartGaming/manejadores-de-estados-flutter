@@ -1,5 +1,6 @@
 import 'package:estados/pages/page1_page.dart';
 import 'package:estados/pages/page2_page.dart';
+import 'package:estados/pages/responsive_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       },*/
       getPages: [
         GetPage(name: "/pagina1", page: (() => const Page1Page())),
-        GetPage(name: "/pagina2", page: (() => Page2Page())),
+        GetPage(name: "/pagina2", page: (() => const Page2Page())),
+        GetPage(name: "/responsive", page: (() => ResponsiveView())),
       ],
     );
   }
